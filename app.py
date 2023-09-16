@@ -12,7 +12,7 @@ from skillNer.general_params import SKILL_DB
 # import skill extractor
 from skillNer.skill_extractor_class import SkillExtractor
 from sklearn.feature_extraction.text import TfidfVectorizer
-import numpy as np
+#import numpy as np
 
 app = Flask(__name__)
 nlp = spacy.load("en_core_web_md")
