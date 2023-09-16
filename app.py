@@ -28,10 +28,6 @@ def initialize_nlp_and_skill_extractor():
         nlp = spacy.load("en_core_web_md")
         skill_extractor = SkillExtractor(nlp, SKILL_DB, PhraseMatcher)
 
-# Lazy loading of spaCy model and SkillExtractor
-@app.before_first_request
-def before_first_request():
-    initialize_nlp_and_skill_extractor()
 
 def extract_text_from_pdf(pdf_path):
         with open(pdf_path, 'rb') as file:
@@ -82,6 +78,7 @@ def calculate_skill_match_score(resume_text, job_description_text):
 	
 @app.route('/extract-text', methods=['POST'])
 def extract_text():
+    initialize_nlp_and_skill_extractor()
     files = request.files.getlist('files')  # 'files' should be the name of the input field in your HTML form
     if not files:
         return jsonify({'error': 'No files provided'})
