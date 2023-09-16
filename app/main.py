@@ -62,6 +62,10 @@ def calculate_skill_match_score(resume_text, job_description_text):
 
     return similarity
 
+@app.route('/', methods=['GET'])
+def test():
+    return "test"
+
 @app.route('/extract-text', methods=['POST'])
 def extract_text():
     if 'folder' not in request.form:
