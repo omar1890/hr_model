@@ -17,8 +17,21 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 #import numpy as np
 
 app = Flask(__name__)
-nlp = spacy.load("en_core_web_md")
-skill_extractor = SkillExtractor(nlp, SKILL_DB, PhraseMatcher) 
+nlp = None
+skill_extractor = None
+
+def initialize_nlp_and_skill_extractor():
+    global nlp
+    global skill_extractor
+
+    if nlp is None:
+        nlp = spacy.load("en_core_web_md")
+        skill_extractor = SkillExtractor(nlp, SKILL_DB, PhraseMatcher)
+
+# Lazy loading of spaCy model and SkillExtractor
+@app.before_first_request
+def before_first_request():
+    initialize_nlp_and_skill_extractor()
 
 def extract_text_from_pdf(pdf_path):
         with open(pdf_path, 'rb') as file:
