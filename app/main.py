@@ -119,5 +119,3 @@ def extract_text():
     return jsonify(result_dict)
 
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
