@@ -25,7 +25,7 @@ def initialize_nlp_and_skill_extractor():
     global skill_extractor
 
     if nlp is None:
-        nlp = spacy.load("en_core_web_sm")
+        nlp = spacy.load("en_core_web_md")
         skill_extractor = SkillExtractor(nlp, SKILL_DB, PhraseMatcher)
 
 
